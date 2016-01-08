@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/require.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">js/require.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">41.31% <small>(202 / 489)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">24.08% <small>(138 / 573)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">32.08% <small>(34 / 106)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">93.55% <small>(29 / 31)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">js/</a> &#187; require.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">24</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">25</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ RequireJS 2.1.11 Copyright (c) 2010-2014, The Dojo Foundation All Rights Reserved.
+ Available via the MIT or new BSD license.
+ see: http://github.com/jrburke/requirejs for details
+*/
+var requirejs,require,define;
+(function(ca){function G(b){return"[object Function]"===M.call(b)}function H(b){return"[object Array]"===M.call(b)}function v(b,c){if(b){var d;for(d=0;d&lt;b.length&amp;&amp;(!b[d]||!c(b[d],d,b));d+=1);}}function U(b,c){<span class="missing-if-branch" title="else path not taken" >E</span>if(b){var d;for(d=b.length-1;-1&lt;d&amp;&amp;(!b[d]||!c(b[d],d,b));d-=1);}}function s(b,c){return ga.call(b,c)}function j(b,c){return s(b,c)&amp;&amp;b[c]}function B(b,c){for(var d in b)<span class="missing-if-branch" title="if path not taken" >I</span>if(s(b,d)&amp;&amp;c(b[d],d))<span class="cstat-no" title="statement not covered" >break}</span>function V(b,c,d,g){c&amp;&amp;B(c,function(c,h){<span class="missing-if-branch" title="else path not taken" >E</span>if(d||!s(b,h))g&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >"object"===typeof c&amp;</span>&amp;<span class="branch-2 cbranch-no" title="branch not covered" >c&amp;</span>&amp;<span class="branch-3 cbranch-no" title="branch not covered" >!H(c)&amp;</span>&amp;<span class="branch-4 cbranch-no" title="branch not covered" >!G(c)&amp;</span>&amp;<span class="branch-5 cbranch-no" title="branch not covered" >!(c instanceof</span>
+RegExp)?(<span class="branch-0 cbranch-no" title="branch not covered" >b[h]||(b[h]={}),V(b[h],c,d,g))</span>:b[h]=c});return b}function t(b,c){return <span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return c.apply(b,arguments)}</span>}<span class="fstat-no" title="function not covered" >function da(b){<span class="cstat-no" title="statement not covered" ></span>throw b;}<span class="fstat-no" title="function not covered" ></span>function ea(b){<span class="cstat-no" title="statement not covered" ></span>if(!b)<span class="cstat-no" title="statement not covered" >return b;<span class="cstat-no" title="statement not covered" >v</span></span>ar c=ca;<span class="cstat-no" title="statement not covered" >v</span>(b.split("."),<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>c=c[b]}</span>);<span class="cstat-no" title="statement not covered" >r</span>eturn c}<span class="fstat-no" title="function not covered" ></span>function C(b,c,d,g){<span class="cstat-no" title="statement not covered" ></span>c=Error(c+"\nhttp://requirejs.org/docs/errors.html#"+b);<span class="cstat-no" title="statement not covered" >c</span>.requireType=b;<span class="cstat-no" title="statement not covered" >c</span>.requireModules=g;<span class="cstat-no" title="statement not covered" >d</span>&amp;&amp;(c.originalError=d);<span class="cstat-no" title="statement not covered" >r</span>eturn c}</span>function ha(b){function c(a,e,b){var f,n,c,d,g,h,i,I=e&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >e.split("/");</span>n=I;var m=l.map,k=m&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >m["*"];<span class="missing-if-branch" title="if path not taken" >I</span></span>if(a&amp;&amp;"."===a.charAt(0))<span class="cstat-no" title="statement not covered" >if(e){<span class="cstat-no" title="statement not covered" >n=</span></span>
+I.slice(0,I.length-1);<span class="cstat-no" title="statement not covered" >a=a.split("/");<span class="cstat-no" title="statement not covered" >e</span>=a.length-1;<span class="cstat-no" title="statement not covered" >l</span>.nodeIdCompat&amp;&amp;R.test(a[e])&amp;&amp;(a[e]=a[e].replace(R,""));<span class="cstat-no" title="statement not covered" >n</span>=a=n.concat(a);<span class="cstat-no" title="statement not covered" >d</span>=n.length;<span class="cstat-no" title="statement not covered" >f</span>or(e=0;e&lt;d;e++)<span class="cstat-no" title="statement not covered" >if(c=n[e],"."===c)<span class="cstat-no" title="statement not covered" >n.splice(e,1),e-=1;e</span>lse <span class="cstat-no" title="statement not covered" >if(".."===c)<span class="cstat-no" title="statement not covered" >if(1===e&amp;&amp;(".."===n[2]||".."===n[0]))<span class="cstat-no" title="statement not covered" >break;e</span>lse <span class="cstat-no" title="statement not covered" >0&lt;e&amp;&amp;(n.splice(e-1,2),e-=2);<span class="cstat-no" title="statement not covered" >a</span></span></span></span></span>=a.join("/")}</span>else <span class="cstat-no" title="statement not covered" >0===a.indexOf("./")&amp;&amp;(a=a.substring(2));<span class="missing-if-branch" title="if path not taken" >I</span>i</span>f(b&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >m&amp;</span>&amp;(<span class="branch-2 cbranch-no" title="branch not covered" >I|</span>|<span class="branch-3 cbranch-no" title="branch not covered" >k)</span>){<span class="cstat-no" title="statement not covered" >n=a.split("/");<span class="cstat-no" title="statement not covered" >e</span>=n.length;<span class="cstat-no" title="statement not covered" >a</span>:<span class="cstat-no" title="statement not covered" >for(;0&lt;e;e-=1){<span class="cstat-no" title="statement not covered" >d=n.slice(0,e).join("/");<span class="cstat-no" title="statement not covered" >i</span>f(I)<span class="cstat-no" title="statement not covered" >for(c=I.length;0&lt;c;c-=1)<span class="cstat-no" title="statement not covered" >if(b=j(m,I.slice(0,c).join("/")))<span class="cstat-no" title="statement not covered" >if(b=j(b,d)){<span class="cstat-no" title="statement not covered" >f=b;</span></span></span></span></span></span></span>
+<span class="cstat-no" title="statement not covered" >g=e;<span class="cstat-no" title="statement not covered" >b</span>reak a}<span class="cstat-no" title="statement not covered" ></span>!h&amp;&amp;(k&amp;&amp;j(k,d))&amp;&amp;(h=j(k,d),i=e)}<span class="cstat-no" title="statement not covered" ></span>!f&amp;&amp;h&amp;&amp;(f=h,g=i);<span class="cstat-no" title="statement not covered" >f</span>&amp;&amp;(n.splice(0,g,f),a=n.join("/"))}</span>return(f=j(l.pkgs,a))?<span class="branch-0 cbranch-no" title="branch not covered" >f:</span>a}<span class="fstat-no" title="function not covered" >function d(a){<span class="cstat-no" title="statement not covered" ></span>z&amp;&amp;v(document.getElementsByTagName("script"),<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>if(e.getAttribute("data-requiremodule")===a&amp;&amp;e.getAttribute("data-requirecontext")===i.contextName)<span class="cstat-no" title="statement not covered" >return e.parentNode.removeChild(e),!0}</span></span>)}<span class="fstat-no" title="function not covered" ></span>function g(a){<span class="cstat-no" title="statement not covered" ></span>var e=j(l.paths,a);<span class="cstat-no" title="statement not covered" >i</span>f(e&amp;&amp;H(e)&amp;&amp;1&lt;e.length)<span class="cstat-no" title="statement not covered" >return e.shift(),i.require.undef(a),i.require([a]),!0}</span></span>function u(a){var e,b=a?a.indexOf("!"):<span class="branch-1 cbranch-no" title="branch not covered" >-1;</span>-1&lt;b&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >e=a.substring(0,</span>
+b),a=a.substring(b+1,a.length));return[e,a]}function m(a,e,b,f){var n,d,g=null,h=e?<span class="branch-0 cbranch-no" title="branch not covered" >e.name:</span>null,l=a,m=!0,k="";a||(m=!1,a="_@r"+(M+=1));a=u(a);g=a[0];a=a[1];g&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >g=c(g,h,f),d=j(p,g))</span>;a&amp;&amp;(g?<span class="branch-0 cbranch-no" title="branch not covered" >k=d&amp;&amp;d.normalize?d.normalize(a,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return c(a,h,f)}</span>):c(a,h,f):</span>(k=c(a,h,f),a=u(k),g=a[0],k=a[1],b=!0,n=i.nameToUrl(k)));b=g&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >!d&amp;</span>&amp;<span class="branch-2 cbranch-no" title="branch not covered" >!b?<span class="branch-0 cbranch-no" title="branch not covered" ></span>"_unnormalized"+(Q+=1):</span>"";return{prefix:g,name:k,parentMap:e,unnormalized:!!b,url:n,originalName:l,isDefine:m,id:(g?<span class="branch-0 cbranch-no" title="branch not covered" >g+"!"+k:</span>k)+b}}function q(a){var e=a.id,b=j(k,e);b||(b=k[e]=new i.Module(a));
+return b}<span class="fstat-no" title="function not covered" >function r(a,e,b){<span class="cstat-no" title="statement not covered" ></span>var f=a.id,n=j(k,f);<span class="cstat-no" title="statement not covered" >i</span>f(s(p,f)&amp;&amp;(!n||n.defineEmitComplete))<span class="cstat-no" title="statement not covered" >"defined"===e&amp;&amp;b(p[f]);e</span>lse <span class="cstat-no" title="statement not covered" >if(n=q(a),n.error&amp;&amp;"error"===e)<span class="cstat-no" title="statement not covered" >b(n.error);e</span>lse <span class="cstat-no" title="statement not covered" >n.on(e,b)}<span class="fstat-no" title="function not covered" ></span></span></span>function w(a,e){<span class="cstat-no" title="statement not covered" ></span>var b=a.requireModules,f=!1;<span class="cstat-no" title="statement not covered" >i</span>f(e)<span class="cstat-no" title="statement not covered" >e(a);e</span>lse <span class="cstat-no" title="statement not covered" >if(v(b,<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>if(e=j(k,e))<span class="cstat-no" title="statement not covered" >e.error=a,e.events.error&amp;&amp;(f=!0,e.emit("error",a))}</span></span>),!f)<span class="cstat-no" title="statement not covered" >h.onError(a)}</span></span></span>function x(){S.length&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >ia.apply(A,[A.length,0].concat(S)),S=[])</span>}function y(a){delete k[a];delete W[a]}<span class="fstat-no" title="function not covered" >function F(a,e,b){<span class="cstat-no" title="statement not covered" ></span>var f=a.map.id;<span class="cstat-no" title="statement not covered" >a</span>.error?a.emit("error",a.error):(e[f]=</span>
+!0,v(a.depMaps,<span class="fstat-no" title="function not covered" >function(f,c){<span class="cstat-no" title="statement not covered" ></span>var d=f.id,g=j(k,d);<span class="cstat-no" title="statement not covered" >g</span>&amp;&amp;(!a.depMatched[c]&amp;&amp;!b[d])&amp;&amp;(j(e,d)?(a.defineDep(c,p[d]),a.check()):F(g,e,b))}</span>),b[f]=!0)}function D(){var a,e,b=(a=1E3*l.waitSeconds)&amp;&amp;i.startTime+a&lt;(new Date).getTime(),f=[],c=[],h=!1,k=!0;<span class="missing-if-branch" title="else path not taken" >E</span>if(!X){X=!0;B(W,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var i=a.map,m=i.id;<span class="cstat-no" title="statement not covered" >i</span>f(a.enabled&amp;&amp;(i.isDefine||c.push(a),!a.error))<span class="cstat-no" title="statement not covered" >if(!a.inited&amp;&amp;b)<span class="cstat-no" title="statement not covered" >g(m)?h=e=!0:(f.push(m),d(m));e</span>lse <span class="cstat-no" title="statement not covered" >if(!a.inited&amp;&amp;(a.fetched&amp;&amp;i.isDefine)&amp;&amp;(h=!0,!i.prefix))<span class="cstat-no" title="statement not covered" >return k=!1}</span></span></span></span>);<span class="missing-if-branch" title="if path not taken" >I</span>if(b&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >f.length)<span class="cstat-no" title="statement not covered" ></span>return a=C("timeout","Load timeout for modules: "+</span>
+f,null,f),a.contextName=i.contextName,w(a);k&amp;&amp;v(c,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>F(a,{},{})}</span>);<span class="missing-if-branch" title="if path not taken" >I</span>if((!b||<span class="branch-1 cbranch-no" title="branch not covered" >e)</span>&amp;&amp;h)<span class="cstat-no" title="statement not covered" >if((z||fa)&amp;&amp;!Y)<span class="cstat-no" title="statement not covered" >Y=setTimeout(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>Y=0;<span class="cstat-no" title="statement not covered" >D</span>()}</span>,50);X</span></span>=!1}}<span class="fstat-no" title="function not covered" >function E(a){<span class="cstat-no" title="statement not covered" ></span>s(p,a[0])||q(m(a[0],null,!0)).init(a[1],a[2])}<span class="fstat-no" title="function not covered" ></span>function K(a){<span class="cstat-no" title="statement not covered" ></span>var a=a.currentTarget||a.srcElement,e=i.onScriptLoad;<span class="cstat-no" title="statement not covered" >a</span>.detachEvent&amp;&amp;!Z?a.detachEvent("onreadystatechange",e):a.removeEventListener("load",e,!1);<span class="cstat-no" title="statement not covered" >e</span>=i.onScriptError;<span class="cstat-no" title="statement not covered" >(</span>!a.detachEvent||Z)&amp;&amp;a.removeEventListener("error",e,!1);<span class="cstat-no" title="statement not covered" >r</span>eturn{node:a,id:a&amp;&amp;a.getAttribute("data-requiremodule")}}</span>function L(){var a;
+for(x();A.length;){<span class="cstat-no" title="statement not covered" >a=A.shift();<span class="cstat-no" title="statement not covered" >i</span>f(null===a[0])<span class="cstat-no" title="statement not covered" >return w(C("mismatch","Mismatched anonymous define() module: "+a[a.length-1]));<span class="cstat-no" title="statement not covered" >E</span></span>(a)}</span>}var X,$,i,N,Y,l={waitSeconds:7,baseUrl:"./",paths:{},bundles:{},pkgs:{},shim:{},config:{}},k={},W={},aa={},A=[],p={},T={},ba={},M=1,Q=1;N={require:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return a.require?a.require:a.require=i.makeRequire(a.map)}</span>,exports:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>a.usingExports=!0;<span class="cstat-no" title="statement not covered" >i</span>f(a.map.isDefine)<span class="cstat-no" title="statement not covered" >return a.exports?p[a.map.id]=a.exports:a.exports=p[a.map.id]={}}</span></span>,module:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return a.module?</span>
+a.module:a.module={id:a.map.id,uri:a.map.url,config:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return j(l.config,a.map.id)||{}}</span>,exports:a.exports||(a.exports={})}}};$=function(a){this.events=j(aa,a.id)||{};this.map=a;this.shim=j(l.shim,a.id);this.depExports=[];this.depMaps=[];this.depMatched=[];this.pluginMaps={};this.depCount=0};$.prototype={init:function(a,e,b,f){f=f||<span class="branch-1 cbranch-no" title="branch not covered" >{};<span class="missing-if-branch" title="else path not taken" >E</span></span>if(!this.inited){this.factory=e;<span class="missing-if-branch" title="if path not taken" >I</span>if(b)<span class="cstat-no" title="statement not covered" >this.on("error",b);e</span>lse this.events.error&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >b=t(this,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.emit("error",a)}</span>))</span>;this.depMaps=a&amp;&amp;a.slice(0);this.errback=
+b;this.inited=!0;this.ignore=f.ignore;f.enabled||<span class="branch-1 cbranch-no" title="branch not covered" >this.enabled?</span>this.enable():<span class="branch-1 cbranch-no" title="branch not covered" >this.check()}</span>},defineDep:<span class="fstat-no" title="function not covered" >function(a,e){<span class="cstat-no" title="statement not covered" ></span>this.depMatched[a]||(this.depMatched[a]=!0,this.depCount-=1,this.depExports[a]=e)}</span>,fetch:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>if(!this.fetched){<span class="cstat-no" title="statement not covered" >this.fetched=!0;<span class="cstat-no" title="statement not covered" >i</span>.startTime=(new Date).getTime();<span class="cstat-no" title="statement not covered" >v</span>ar a=this.map;<span class="cstat-no" title="statement not covered" >i</span>f(this.shim)<span class="cstat-no" title="statement not covered" >i.makeRequire(this.map,{enableBuildCallback:!0})(this.shim.deps||[],t(this,<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return a.prefix?this.callPlugin():this.load()}</span>));e</span>lse <span class="cstat-no" title="statement not covered" >return a.prefix?this.callPlugin():this.load()}</span></span>}</span>,load:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var a=</span>
+this.map.url;<span class="cstat-no" title="statement not covered" >T[a]||(T[a]=!0,i.load(this.map.id,a))}</span>,check:function(){<span class="missing-if-branch" title="else path not taken" >E</span>if(this.enabled&amp;&amp;!this.enabling){var a,e,b=this.map.id;e=this.depExports;var f=this.exports,c=this.factory;<span class="missing-if-branch" title="else path not taken" >E</span>if(this.inited)<span class="missing-if-branch" title="if path not taken" >I</span>if(this.error)<span class="cstat-no" title="statement not covered" >this.emit("error",this.error);e</span>lse{<span class="missing-if-branch" title="else path not taken" >E</span>if(!this.defining){this.defining=!0;<span class="missing-if-branch" title="else path not taken" >E</span>if(1&gt;this.depCount&amp;&amp;!this.defined){<span class="missing-if-branch" title="if path not taken" >I</span>if(G(c)){<span class="cstat-no" title="statement not covered" >if(this.events.error&amp;&amp;this.map.isDefine||h.onError!==da)<span class="cstat-no" title="statement not covered" >try{<span class="cstat-no" title="statement not covered" >f=i.execCb(b,c,e,f)}</span>catch(d){<span class="cstat-no" title="statement not covered" >a=d}</span>e</span>lse <span class="cstat-no" title="statement not covered" >f=i.execCb(b,c,e,f);<span class="cstat-no" title="statement not covered" >t</span></span>his.map.isDefine&amp;&amp;void 0===f&amp;&amp;((e=this.module)?f=e.exports:this.usingExports&amp;&amp;</span>
+(f=this.exports));<span class="cstat-no" title="statement not covered" >if(a)<span class="cstat-no" title="statement not covered" >return a.requireMap=this.map,a.requireModules=this.map.isDefine?[this.map.id]:null,a.requireType=this.map.isDefine?"define":"require",w(this.error=a)}</span></span>else f=c;this.exports=f;<span class="missing-if-branch" title="if path not taken" >I</span>if(this.map.isDefine&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >!this.ignore&amp;</span>&amp;(<span class="branch-2 cbranch-no" title="branch not covered" >p[b]=f,h.onResourceLoad)</span>)<span class="cstat-no" title="statement not covered" >h.onResourceLoad(i,this.map,this.depMaps);y</span>(b);this.defined=!0}this.defining=!1;this.defined&amp;&amp;!this.defineEmitted&amp;&amp;(this.defineEmitted=!0,this.emit("defined",this.exports),this.defineEmitComplete=!0)}}else <span class="cstat-no" title="statement not covered" >this.fetch()}</span>},callPlugin:<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var a=</span>
+this.map,b=a.id,d=m(a.prefix);<span class="cstat-no" title="statement not covered" >this.depMaps.push(d);<span class="cstat-no" title="statement not covered" >r</span>(d,"defined",t(this,<span class="fstat-no" title="function not covered" >function(f){<span class="cstat-no" title="statement not covered" ></span>var d,g;<span class="cstat-no" title="statement not covered" >g</span>=j(ba,this.map.id);<span class="cstat-no" title="statement not covered" >v</span>ar J=this.map.name,u=this.map.parentMap?this.map.parentMap.name:null,p=i.makeRequire(a.parentMap,{enableBuildCallback:!0});<span class="cstat-no" title="statement not covered" >i</span>f(this.map.unnormalized){<span class="cstat-no" title="statement not covered" >if(f.normalize&amp;&amp;(J=f.normalize(J,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return c(a,u,!0)}</span>)||""),f=m(a.prefix+"!"+J,this.map.parentMap),r(f,"defined",t(this,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.init([],<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return a}</span>,null,{enabled:!0,ignore:!0})}</span>)),g=j(k,f.id)){<span class="cstat-no" title="statement not covered" >this.depMaps.push(f);</span></span></span></span>
+<span class="cstat-no" title="statement not covered" >if(this.events.error)<span class="cstat-no" title="statement not covered" >g.on("error",t(this,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.emit("error",a)}</span>));<span class="cstat-no" title="statement not covered" >g</span></span>.enable()}</span>}else <span class="cstat-no" title="statement not covered" >g?(this.map.url=i.nameToUrl(g),this.load()):(d=t(this,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.init([],<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return a}</span>,null,{enabled:!0})}</span>),d.error=t(this,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.inited=!0;<span class="cstat-no" title="statement not covered" >t</span>his.error=a;<span class="cstat-no" title="statement not covered" >a</span>.requireModules=[b];<span class="cstat-no" title="statement not covered" >B</span>(k,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>0===a.map.id.indexOf(b+"_unnormalized")&amp;&amp;y(a.map.id)}</span>);<span class="cstat-no" title="statement not covered" >w</span>(a)}</span>),d.fromText=t(this,<span class="fstat-no" title="function not covered" >function(f,c){<span class="cstat-no" title="statement not covered" ></span>var g=a.name,J=m(g),k=O;<span class="cstat-no" title="statement not covered" >c</span>&amp;&amp;(f=c);<span class="cstat-no" title="statement not covered" >k</span>&amp;&amp;(O=!1);<span class="cstat-no" title="statement not covered" >q</span>(J);<span class="cstat-no" title="statement not covered" >s</span>(l.config,b)&amp;&amp;(l.config[g]=l.config[b]);<span class="cstat-no" title="statement not covered" >t</span>ry{<span class="cstat-no" title="statement not covered" >h.exec(f)}</span>catch(j){<span class="cstat-no" title="statement not covered" >return w(C("fromtexteval",</span></span></span>
+"fromText eval for "+b+" failed: "+j,j,[b]))}<span class="cstat-no" title="statement not covered" >k&amp;&amp;(O=!0);<span class="cstat-no" title="statement not covered" >t</span>his.depMaps.push(J);<span class="cstat-no" title="statement not covered" >i</span>.completeLoad(g);<span class="cstat-no" title="statement not covered" >p</span>([g],d)}</span>),f.load(a.name,p,d,l))}));<span class="cstat-no" title="statement not covered" >i.enable(d,this);<span class="cstat-no" title="statement not covered" >t</span>his.pluginMaps[d.id]=d}</span>,enable:function(){W[this.map.id]=this;this.enabling=this.enabled=!0;v(this.depMaps,t(this,<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>var c,f;<span class="cstat-no" title="statement not covered" >i</span>f("string"===typeof a){<span class="cstat-no" title="statement not covered" >a=m(a,this.map.isDefine?this.map:this.map.parentMap,!1,!this.skipMap);<span class="cstat-no" title="statement not covered" >t</span>his.depMaps[b]=a;<span class="cstat-no" title="statement not covered" >i</span>f(c=j(N,a.id)){<span class="cstat-no" title="statement not covered" >this.depExports[b]=c(this);<span class="cstat-no" title="statement not covered" >r</span>eturn}<span class="cstat-no" title="statement not covered" ></span>t</span>his.depCount+=1;<span class="cstat-no" title="statement not covered" >r</span>(a,"defined",t(this,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>this.defineDep(b,</span></span></span>
+a);<span class="cstat-no" title="statement not covered" >this.check()}</span>));<span class="cstat-no" title="statement not covered" >this.errback&amp;&amp;r(a,"error",t(this,this.errback))}<span class="cstat-no" title="statement not covered" ></span>c=a.id;<span class="cstat-no" title="statement not covered" >f</span>=k[c];<span class="cstat-no" title="statement not covered" >!</span>s(N,c)&amp;&amp;(f&amp;&amp;!f.enabled)&amp;&amp;i.enable(a,this)}</span>));B(this.pluginMaps,t(this,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b=j(k,a.id);<span class="cstat-no" title="statement not covered" >b</span>&amp;&amp;!b.enabled&amp;&amp;i.enable(a,this)}</span>));this.enabling=!1;this.check()},on:<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>var c=this.events[a];<span class="cstat-no" title="statement not covered" >c</span>||(c=this.events[a]=[]);<span class="cstat-no" title="statement not covered" >c</span>.push(b)}</span>,emit:function(a,b){v(this.events[a],<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>a(b)}</span>);"error"===a&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >delete this.events[a]}</span>};i={config:l,contextName:b,registry:k,defined:p,urlFetched:T,defQueue:A,Module:$,makeModuleMap:m,
+nextTick:h.nextTick,onError:w,configure:function(a){a.baseUrl&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >"/"!==a.baseUrl.charAt(a.baseUrl.length-1)&amp;</span>&amp;(<span class="branch-2 cbranch-no" title="branch not covered" >a.baseUrl+="/")</span>;var b=l.shim,c={paths:!0,bundles:!0,config:!0,map:!0};B(a,<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>c[b]?(l[b]||(l[b]={}),V(l[b],a,!0,!0)):l[b]=a}</span>);a.bundles&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >B(a.bundles,<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>v(a,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>a!==b&amp;&amp;(ba[a]=b)}</span>)}</span>);</span>a.shim&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >B(a.shim,<span class="fstat-no" title="function not covered" >function(a,c){<span class="cstat-no" title="statement not covered" ></span>H(a)&amp;&amp;(a={deps:a});<span class="cstat-no" title="statement not covered" >i</span>f((a.exports||a.init)&amp;&amp;!a.exportsFn)<span class="cstat-no" title="statement not covered" >a.exportsFn=i.makeShimExports(a);<span class="cstat-no" title="statement not covered" >b</span></span>[c]=a}</span>),l.shim=b)</span>;a.packages&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >v(a.packages,<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b,</span></span>
+a="string"===typeof a?{name:a}:a;<span class="cstat-no" title="statement not covered" >b=a.name;<span class="cstat-no" title="statement not covered" >a</span>.location&amp;&amp;(l.paths[b]=a.location);<span class="cstat-no" title="statement not covered" >l</span>.pkgs[b]=a.name+"/"+(a.main||"main").replace(ja,"").replace(R,"")}</span>);B(k,<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>!a.inited&amp;&amp;!a.map.unnormalized&amp;&amp;(a.map=m(b))}</span>);<span class="missing-if-branch" title="if path not taken" >I</span>if(a.deps||a.callback)<span class="cstat-no" title="statement not covered" >i.require(a.deps||[],a.callback)}</span>,makeShimExports:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>return <span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var b;<span class="cstat-no" title="statement not covered" >a</span>.init&amp;&amp;(b=a.init.apply(ca,arguments));<span class="cstat-no" title="statement not covered" >r</span>eturn b||a.exports&amp;&amp;ea(a.exports)}</span>}</span>,makeRequire:function(a,e){function g(f,c,d){var j,l;e.enableBuildCallback&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >c&amp;</span>&amp;<span class="branch-2 cbranch-no" title="branch not covered" >G(c))</span>&amp;&amp;(<span class="branch-3 cbranch-no" title="branch not covered" >c.__requireJsBuild=</span>
+!0);<span class="missing-if-branch" title="if path not taken" >I</span>if("string"===typeof f){<span class="cstat-no" title="statement not covered" >if(G(c))<span class="cstat-no" title="statement not covered" >return w(C("requireargs","Invalid require call"),d);<span class="cstat-no" title="statement not covered" >i</span></span>f(a&amp;&amp;s(N,f))<span class="cstat-no" title="statement not covered" >return N[f](k[a.id]);<span class="cstat-no" title="statement not covered" >i</span></span>f(h.get)<span class="cstat-no" title="statement not covered" >return h.get(i,f,a,g);<span class="cstat-no" title="statement not covered" >j</span></span>=m(f,a,!1,!0);<span class="cstat-no" title="statement not covered" >j</span>=j.id;<span class="cstat-no" title="statement not covered" >r</span>eturn!s(p,j)?w(C("notloaded",'Module name "'+j+'" has not been loaded yet for context: '+b+(a?"":". Use require([])"))):p[j]}</span>L();i.nextTick(function(){L();l=q(m(null,a));l.skipMap=e.skipMap;l.init(f,c,d,{enabled:!0});D()});return g}e=e||{};V(g,{isBrowser:z,toUrl:<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>var e,d=b.lastIndexOf("."),g=b.split("/")[0];<span class="cstat-no" title="statement not covered" >i</span>f(-1!==</span>
+d&amp;&amp;(!("."===g||".."===g)||1&lt;d))<span class="cstat-no" title="statement not covered" >e=b.substring(d,b.length),b=b.substring(0,d);<span class="cstat-no" title="statement not covered" >r</span>eturn i.nameToUrl(c(b,a&amp;&amp;a.id,!0),e,!0)}</span>,defined:<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>return s(p,m(b,a,!1,!0).id)}</span>,specified:<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>b=m(b,a,!1,!0).id;<span class="cstat-no" title="statement not covered" >r</span>eturn s(p,b)||s(k,b)}</span>});a||(g.undef=<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>x();<span class="cstat-no" title="statement not covered" >v</span>ar c=m(b,a,!0),e=j(k,b);<span class="cstat-no" title="statement not covered" >d</span>(b);<span class="cstat-no" title="statement not covered" >d</span>elete p[b];<span class="cstat-no" title="statement not covered" >d</span>elete T[c.url];<span class="cstat-no" title="statement not covered" >d</span>elete aa[b];<span class="cstat-no" title="statement not covered" >U</span>(A,<span class="fstat-no" title="function not covered" >function(a,c){<span class="cstat-no" title="statement not covered" ></span>a[0]===b&amp;&amp;A.splice(c,1)}</span>);<span class="cstat-no" title="statement not covered" >e</span>&amp;&amp;(e.events.defined&amp;&amp;(aa[b]=e.events),y(b))}</span>);return g},enable:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>j(k,a.id)&amp;&amp;q(a).enable()}</span>,completeLoad:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b,</span>
+c,f=j(l.shim,a)||{},d=f.exports;<span class="cstat-no" title="statement not covered" >for(x();A.length;){<span class="cstat-no" title="statement not covered" >c=A.shift();<span class="cstat-no" title="statement not covered" >i</span>f(null===c[0]){<span class="cstat-no" title="statement not covered" >c[0]=a;<span class="cstat-no" title="statement not covered" >i</span>f(b)<span class="cstat-no" title="statement not covered" >break;<span class="cstat-no" title="statement not covered" >b</span></span>=!0}</span>else <span class="cstat-no" title="statement not covered" >c[0]===a&amp;&amp;(b=!0);<span class="cstat-no" title="statement not covered" >E</span></span>(c)}<span class="cstat-no" title="statement not covered" ></span>c</span>=j(k,a);<span class="cstat-no" title="statement not covered" >i</span>f(!b&amp;&amp;!s(p,a)&amp;&amp;c&amp;&amp;!c.inited){<span class="cstat-no" title="statement not covered" >if(l.enforceDefine&amp;&amp;(!d||!ea(d)))<span class="cstat-no" title="statement not covered" >return g(a)?void 0:w(C("nodefine","No define call for "+a,null,[a]));<span class="cstat-no" title="statement not covered" >E</span></span>([a,f.deps||[],f.exportsFn])}<span class="cstat-no" title="statement not covered" ></span>D</span>()}</span>,nameToUrl:function(a,b,c){var f,d,g;(f=j(l.pkgs,a))&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >a=f)</span>;<span class="missing-if-branch" title="if path not taken" >I</span>if(f=j(ba,a))<span class="cstat-no" title="statement not covered" >return i.nameToUrl(f,b,c);<span class="missing-if-branch" title="if path not taken" >I</span>i</span>f(h.jsExtRegExp.test(a))<span class="cstat-no" title="statement not covered" >f=a+(b||"");e</span>lse{f=l.paths;a=a.split("/");for(d=a.length;0&lt;d;d-=1)<span class="missing-if-branch" title="if path not taken" >I</span>if(g=a.slice(0,
+d).join("/"),g=j(f,g)){<span class="cstat-no" title="statement not covered" >H(g)&amp;&amp;(g=g[0]);<span class="cstat-no" title="statement not covered" >a</span>.splice(0,d,g);<span class="cstat-no" title="statement not covered" >b</span>reak}</span>f=a.join("/");f+=b||(/^data\:|\?/.test(f)||c?<span class="branch-0 cbranch-no" title="branch not covered" >"":</span>".js");f=("/"===f.charAt(0)||f.match(/^[\w\+\.\-]+:/)?<span class="branch-0 cbranch-no" title="branch not covered" >"":</span>l.baseUrl)+f}return l.urlArgs?<span class="branch-0 cbranch-no" title="branch not covered" >f+((-1===f.indexOf("?")?"?":"&amp;")+l.urlArgs):</span>f},load:<span class="fstat-no" title="function not covered" >function(a,b){<span class="cstat-no" title="statement not covered" ></span>h.load(i,a,b)}</span>,execCb:<span class="fstat-no" title="function not covered" >function(a,b,c,d){<span class="cstat-no" title="statement not covered" ></span>return b.apply(d,c)}</span>,onScriptLoad:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>if("load"===a.type||ka.test((a.currentTarget||a.srcElement).readyState))<span class="cstat-no" title="statement not covered" >P=null,a=K(a),i.completeLoad(a.id)}</span></span>,onScriptError:<span class="fstat-no" title="function not covered" >function(a){<span class="cstat-no" title="statement not covered" ></span>var b=K(a);<span class="cstat-no" title="statement not covered" >i</span>f(!g(b.id))<span class="cstat-no" title="statement not covered" >return w(C("scripterror",</span></span>
+"Script error for: "+b.id,a,[b.id]))}};i.require=i.makeRequire();return i}var h,x,y,D,K,E,P,L,q,Q,la=/(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg,ma=/[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g,R=/\.js$/,ja=/^\.\//;x=Object.prototype;var M=x.toString,ga=x.hasOwnProperty,ia=Array.prototype.splice,z=!!("undefined"!==typeof window&amp;&amp;"undefined"!==typeof navigator&amp;&amp;window.document),fa=!z&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >"undefined"!==typeof importScripts,</span>ka=z&amp;&amp;"PLAYSTATION 3"===navigator.platform?<span class="branch-0 cbranch-no" title="branch not covered" >/^complete$/:</span>/^(complete|loaded)$/,
+Z="undefined"!==typeof opera&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >"[object Opera]"===opera.toString(),</span>F={},r={},S=[],O=!1;<span class="missing-if-branch" title="else path not taken" >E</span>if("undefined"===typeof define){<span class="missing-if-branch" title="if path not taken" >I</span>if("undefined"!==typeof requirejs){<span class="cstat-no" title="statement not covered" >if(G(requirejs))<span class="cstat-no" title="statement not covered" >return;<span class="cstat-no" title="statement not covered" >r</span></span>=requirejs;<span class="cstat-no" title="statement not covered" >r</span>equirejs=void 0}</span>"undefined"!==typeof require&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >!G(require)&amp;</span>&amp;(<span class="branch-2 cbranch-no" title="branch not covered" >r=require,require=void 0)</span>;h=requirejs=function(b,c,d,g){var u,m="_";!H(b)&amp;&amp;"string"!==typeof b&amp;&amp;(u=b,H(c)?(<span class="branch-0 cbranch-no" title="branch not covered" >b=c,c=d,d=g)</span>:b=[]);u&amp;&amp;u.context&amp;&amp;(<span class="branch-2 cbranch-no" title="branch not covered" >m=u.context)</span>;(g=j(F,m))||(g=F[m]=h.s.newContext(m));u&amp;&amp;g.configure(u);return g.require(b,c,d)};h.config=<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>return h(b)}</span>;
+h.nextTick="undefined"!==typeof setTimeout?function(b){setTimeout(b,4)}:<span class="fstat-no" title="function not covered" ><span class="branch-1 cbranch-no" title="branch not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>b()}</span>;</span>require||(require=h);h.version="2.1.11";h.jsExtRegExp=/^\/|:|\?|\.js$/;h.isBrowser=z;x=h.s={contexts:F,newContext:ha};h({});v(["toUrl","undef","defined","specified"],function(b){h[b]=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var c=F._;<span class="cstat-no" title="statement not covered" >r</span>eturn c.require[b].apply(c,arguments)}</span>});<span class="missing-if-branch" title="if path not taken" >I</span>if(z&amp;&amp;(y=x.head=document.getElementsByTagName("head")[0],D=document.getElementsByTagName("base")[0]))<span class="cstat-no" title="statement not covered" >y=x.head=D.parentNode;h</span>.onError=da;h.createNode=<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>var c=</span>
+b.xhtml?document.createElementNS("http://www.w3.org/1999/xhtml","html:script"):document.createElement("script");<span class="cstat-no" title="statement not covered" >c.type=b.scriptType||"text/javascript";<span class="cstat-no" title="statement not covered" >c</span>.charset="utf-8";<span class="cstat-no" title="statement not covered" >c</span>.async=!0;<span class="cstat-no" title="statement not covered" >r</span>eturn c}</span>;h.load=<span class="fstat-no" title="function not covered" >function(b,c,d){<span class="cstat-no" title="statement not covered" ></span>var g=b&amp;&amp;b.config||{};<span class="cstat-no" title="statement not covered" >i</span>f(z)<span class="cstat-no" title="statement not covered" >return g=h.createNode(g,c,d),g.setAttribute("data-requirecontext",b.contextName),g.setAttribute("data-requiremodule",c),g.attachEvent&amp;&amp;!(g.attachEvent.toString&amp;&amp;0&gt;g.attachEvent.toString().indexOf("[native code"))&amp;&amp;!Z?(O=!0,g.attachEvent("onreadystatechange",b.onScriptLoad)):</span></span>
+(g.addEventListener("load",b.onScriptLoad,!1),g.addEventListener("error",b.onScriptError,!1)),g.src=d,L=g,D?y.insertBefore(g,D):y.appendChild(g),L=null,g;<span class="cstat-no" title="statement not covered" >if(fa)<span class="cstat-no" title="statement not covered" >try{<span class="cstat-no" title="statement not covered" >importScripts(d),b.completeLoad(c)}</span>catch(j){<span class="cstat-no" title="statement not covered" >b.onError(C("importscripts","importScripts failed for "+c+" at "+d,j,[c]))}</span>}</span></span>;z&amp;&amp;!r.skipDataMain&amp;&amp;U(document.getElementsByTagName("script"),function(b){y||(<span class="branch-1 cbranch-no" title="branch not covered" >y=b.parentNode)</span>;<span class="missing-if-branch" title="if path not taken" >I</span>if(K=b.getAttribute("data-main"))<span class="cstat-no" title="statement not covered" >return q=K,r.baseUrl||(E=q.split("/"),q=E.pop(),Q=E.length?E.join("/")+"/":"./",r.baseUrl=</span>
+Q),q=q.replace(R,""),h.jsExtRegExp.test(q)&amp;&amp;(q=K),r.deps=r.deps?r.deps.concat(q):[q],!0});define=<span class="fstat-no" title="function not covered" >function(b,c,d){<span class="cstat-no" title="statement not covered" ></span>var g,h;<span class="cstat-no" title="statement not covered" >"</span>string"!==typeof b&amp;&amp;(d=c,c=b,b=null);<span class="cstat-no" title="statement not covered" >H</span>(c)||(d=c,c=null);<span class="cstat-no" title="statement not covered" >!</span>c&amp;&amp;G(d)&amp;&amp;(c=[],d.length&amp;&amp;(d.toString().replace(la,"").replace(ma,<span class="fstat-no" title="function not covered" >function(b,d){<span class="cstat-no" title="statement not covered" ></span>c.push(d)}</span>),c=(1===d.length?["require"]:["require","exports","module"]).concat(c)));<span class="cstat-no" title="statement not covered" >i</span>f(O){<span class="cstat-no" title="statement not covered" >if(!(g=L))<span class="cstat-no" title="statement not covered" >P&amp;&amp;"interactive"===P.readyState||U(document.getElementsByTagName("script"),<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>if("interactive"===b.readyState)<span class="cstat-no" title="statement not covered" >return P=b}</span></span>),g=P;<span class="cstat-no" title="statement not covered" >g</span></span>&amp;&amp;(b||</span></span>
+(b=g.getAttribute("data-requiremodule")),h=F[g.getAttribute("data-requirecontext")])}<span class="cstat-no" title="statement not covered" >(h?h.defQueue:S).push([b,c,d])}</span>;define.amd={jQuery:!0};h.exec=<span class="fstat-no" title="function not covered" >function(b){<span class="cstat-no" title="statement not covered" ></span>return eval(b)}</span>;h(r)}})(this);
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 10 2014 14:07:58 GMT-0700 (PDT)</div>
+</div>
+
+<script src="../prettify.js"></script>
+
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

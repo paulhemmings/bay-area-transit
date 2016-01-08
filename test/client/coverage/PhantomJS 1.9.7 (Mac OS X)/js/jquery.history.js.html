@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for js/jquery.history.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("http://yui.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">js/jquery.history.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">35.76% <small>(123 / 344)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">30.59% <small>(182 / 595)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">41.51% <small>(44 / 106)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">100% <small>(1 / 1)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">js/</a> &#187; jquery.history.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1</td><td class="line-coverage"><span class="cline-any cline-yes">5</span></td><td class="text"><pre class="prettyprint lang-js">typeof JSON!="object"&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >JSON={})</span>,function(<span class="fstat-no" title="function not covered" >){"use strict";function f(e){<span class="cstat-no" title="statement not covered" ></span>retur<span class="fstat-no" title="function not covered" >n e&lt;10?"0"+e:e}</span>function quote(e){<span class="cstat-no" title="statement not covered" ></span>return escapable.lastIndex=0,escapable.test(e)?'"'+e.replace(escapable,<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=meta[e];<span class="cstat-no" title="statement not covered" >r</span>eturn typeof t=="string"?t:"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)}</span>)<span class="fstat-no" title="function not covered" >+'"':'"'+e+'"'}</span>function str(e,t){<span class="cstat-no" title="statement not covered" ></span>var n,r,i,s,o=gap,u,a=t[e];<span class="cstat-no" title="statement not covered" >a</span>&amp;&amp;typeof a=="object"&amp;&amp;typeof a.toJSON=="function"&amp;&amp;(a=a.toJSON(e)),typeof rep=="function"&amp;&amp;(a=rep.call(t,e,a));<span class="cstat-no" title="statement not covered" >s</span>witch(typeof a){case"string":<span class="cstat-no" title="statement not covered" >return quote(a);c</span>ase"number":<span class="cstat-no" title="statement not covered" >return isFinite(a)?String(a):"null";c</span>ase"boolean":case"null":<span class="cstat-no" title="statement not covered" >return String(a);c</span>ase"object":<span class="cstat-no" title="statement not covered" >if(!a)<span class="cstat-no" title="statement not covered" >return"null";<span class="cstat-no" title="statement not covered" >g</span></span>ap+=indent,u=[];<span class="cstat-no" title="statement not covered" >i</span>f(Object.prototype.toString.apply(a)==="[object Array]"){<span class="cstat-no" title="statement not covered" >s=a.length;<span class="cstat-no" title="statement not covered" >f</span>or(n=0;n&lt;s;n+=1)<span class="cstat-no" title="statement not covered" >u[n]=str(n,a)||"null";<span class="cstat-no" title="statement not covered" >r</span></span>eturn i=u.length===0?"[]":gap?"[\n"+gap+u.join(",\n"+gap)+"\n"+o+"]":"["+u.join(",")+"]",gap=o,i}<span class="cstat-no" title="statement not covered" ></span>i</span>f(rep&amp;&amp;typeof rep=="object"){<span class="cstat-no" title="statement not covered" >s=rep.length;<span class="cstat-no" title="statement not covered" >f</span>or(n=0;n&lt;s;n+=1)<span class="cstat-no" title="statement not covered" >typeof rep[n]=="string"&amp;&amp;(r=rep[n],i=str(r,a),i&amp;&amp;u.push(quote(r)+(gap?": ":":")+i))}</span></span>else <span class="cstat-no" title="statement not covered" >for(r in a)<span class="cstat-no" title="statement not covered" >Object.prototype.hasOwnProperty.call(a,r)&amp;&amp;(i=str(r,a),i&amp;&amp;u.push(quote(r)+(gap?": ":":")+i));<span class="cstat-no" title="statement not covered" >r</span></span></span>eturn i=u.length===0?"{}":gap?"{\n"+gap+u.join(",\n"+gap)+"\n"+o+"}":"{"+u.join(",")+"}",gap=o,i}</span>}</span>typeof Date.prototype.toJSON!="function"&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >Date.prototype.toJSON=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return isFinite(this.valueOf())?this.getUTCFullYear()+"-"+f(this.getUTCMonth()+1)+"-"+f(this.getUTCDate())+"T"+f(this.getUTCHours())+":"+f(this.getUTCMinutes())+":"+f(this.getUTCSeconds())+"Z":null}</span>,String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return this.valueOf()}</span>)</span>;var cx=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,escapable=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta={"\b":"\\b","	":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"},rep;typeof JSON.stringify!="function"&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >JSON.stringify=<span class="fstat-no" title="function not covered" >function(e,t,n){<span class="cstat-no" title="statement not covered" ></span>var r;<span class="cstat-no" title="statement not covered" >g</span>ap="",indent="";<span class="cstat-no" title="statement not covered" >i</span>f(typeof n=="number")<span class="cstat-no" title="statement not covered" >for(r=0;r&lt;n;r+=1)<span class="cstat-no" title="statement not covered" >indent+=" ";e</span></span>lse <span class="cstat-no" title="statement not covered" >typeof n=="string"&amp;&amp;(indent=n);<span class="cstat-no" title="statement not covered" >r</span></span>ep=t;<span class="cstat-no" title="statement not covered" >i</span>f(!t||typeof t=="function"||typeof t=="object"&amp;&amp;typeof t.length=="number")<span class="cstat-no" title="statement not covered" >return str("",{"":e});<span class="cstat-no" title="statement not covered" >t</span></span>hrow new Error("JSON.stringify")}</span>)</span>,typeof JSON.parse!="function"&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >JSON.parse=<span class="fstat-no" title="function not covered" >function<span class="fstat-no" title="function not covered" >(text,reviver){</span>function walk(e,t){<span class="cstat-no" title="statement not covered" ></span>var n,r,i=e[t];<span class="cstat-no" title="statement not covered" >i</span>f(i&amp;&amp;typeof i=="object")<span class="cstat-no" title="statement not covered" >for(n in i)<span class="cstat-no" title="statement not covered" >Object.prototype.hasOwnProperty.call(i,n)&amp;&amp;(r=walk(i,n),r!==undefined?i[n]=r:delete i[n]);<span class="cstat-no" title="statement not covered" >r</span></span></span>eturn reviver.call(e,t,i)}<span class="cstat-no" title="statement not covered" ></span>var j;<span class="cstat-no" title="statement not covered" >t</span>ext=String(text),cx.lastIndex=0,cx.test(text)&amp;&amp;(text=text.replace(cx,<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)}</span>));<span class="cstat-no" title="statement not covered" >i</span>f(/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,"@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g,"")))<span class="cstat-no" title="statement not covered" >return j=eval("("+text+")"),typeof reviver=="function"?walk({"":j},""):j;<span class="cstat-no" title="statement not covered" >t</span></span>hrow new SyntaxError("JSON.parse")}</span>)</span>}(),function(e,t){"use strict";var n=e.History=e.History|<span class="missing-if-branch" title="if path not taken" >I</span>|{},r=e.jQuery;if(typeof n.Adapter!="undefined")<span class="cstat-no" title="statement not covered" >throw new Error("History.js Adapter has already been loaded...");n</span>.Adapter={bind:function(e,t,n){r(e).bind(t,n)},trigger:<span class="fstat-no" title="function not covered" >function(e,t,n){<span class="cstat-no" title="statement not covered" ></span>r(e).trigger(t,n)}</span>,extractEventData:function(e,n,r){var i=n&amp;&amp;n.originalEvent&amp;&amp;n.originalEvent[e]||r&amp;&amp;<span class="branch-4 cbranch-no" title="branch not covered" >r[e]|</span>|t;return i},onDomLoad:<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>r(e)}</span>},typeof n.init!="undefined"&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >n.init()}</span>(window),function(e,t){"use strict";var n=e.document,r=e.setTimeout||<span class="branch-1 cbranch-no" title="branch not covered" >r,</span>i=e.clearTimeout||<span class="branch-1 cbranch-no" title="branch not covered" >i,</span>s=e.setInterval||<span class="branch-1 cbranch-no" title="branch not covered" >s,</span>o=e.History<span class="missing-if-branch" title="if path not taken" >I</span>=e.History||<span class="branch-1 cbranch-no" title="branch not covered" >{};</span>if(typeof o.initHtml4!="undefined")<span class="cstat-no" title="statement not covered" >throw new Error("History.js HTML4 Support has already been loaded...");o</span>.initHt<span class="missing-if-branch" title="if path not taken" >I</span>ml4=function(){if(typeof o.initHtml4.initialized!="undefined")<span class="cstat-no" title="statement not covered" >return!1;o</span>.initHtml4.initialized=!0,o.enabled=!0,o.savedHashes=[],o.isLastHash=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=o.getHashByIndex(),n;<span class="cstat-no" title="statement not covered" >r</span>eturn n=e===t,n}</span>,o.isHashEqual=<span class="fstat-no" title="function not covered" >function(e,t){<span class="cstat-no" title="statement not covered" ></span>return e=encodeURIComponent(e).replace(/%25/g,"%"),t=encodeURIComponent(t).replace(/%25/g,"%"),e===t}</span>,o.saveHash=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return o.isLastHash(e)?!1:(o.savedHashes.push(e),!0)}</span>,o.getHashByIndex=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=null;<span class="cstat-no" title="statement not covered" >r</span>eturn typeof e=="undefined"?t=o.savedHashes[o.savedHashes.length-1]:e&lt;0?t=o.savedHashes[o.savedHashes.length+e]:t=o.savedHashes[e],t}</span>,o.discardedHashes={},o.discardedStates={},o.discardState=<span class="fstat-no" title="function not covered" >function(e,t,n){<span class="cstat-no" title="statement not covered" ></span>var r=o.getHashByState(e),i;<span class="cstat-no" title="statement not covered" >r</span>eturn i={discardedState:e,backState:n,forwardState:t},o.discardedStates[r]=i,!0}</span>,o.discardHash=<span class="fstat-no" title="function not covered" >function(e,t,n){<span class="cstat-no" title="statement not covered" ></span>var r={discardedHash:e,backState:n,forwardState:t};<span class="cstat-no" title="statement not covered" >r</span>eturn o.discardedHashes[e]=r,!0}</span>,o.discardedState=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=o.getHashByState(e),n;<span class="cstat-no" title="statement not covered" >r</span>eturn n=o.discardedStates[t]||!1,n}</span>,o.discardedHash=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=o.discardedHashes[e]||!1;<span class="cstat-no" title="statement not covered" >r</span>eturn t}</span>,o.recycleState=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=o.getHashByState(e);<span class="cstat-no" title="statement not covered" >r</span>eturn o.discardedState(e)&amp;&amp;delete o.discardedStates[t],!0}</span>,o.emulated.hashChange&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >o.hashChangeInit=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>o.checkerFunction=null;<span class="cstat-no" title="statement not covered" >v</span>ar t="",r,i,u,a,f=Boolean(o.getHash());<span class="cstat-no" title="statement not covered" >r</span>eturn o.isInternetExplorer()?(r="historyjs-iframe",i=n.createElement("iframe"),i.setAttribute("id",r),i.setAttribute("src","#"),i.style.display="none",n.body.appendChild(i),i.contentWindow.document.open(),i.contentWindow.document.close(),u="",a=!1,o.checkerFunction=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>if(a)<span class="cstat-no" title="statement not covered" >return!1;<span class="cstat-no" title="statement not covered" >a</span></span>=!0;<span class="cstat-no" title="statement not covered" >v</span>ar n=o.getHash(),r=o.getHash(i.contentWindow.document);<span class="cstat-no" title="statement not covered" >r</span>eturn n!==t?(t=n,r!==n&amp;&amp;(u=r=n,i.contentWindow.document.open(),i.contentWindow.document.close(),i.contentWindow.document.location.hash=o.escapeHash(n)),o.Adapter.trigger(e,"hashchange")):r!==u&amp;&amp;(u=r,f&amp;&amp;r===""?o.back():o.setHash(r,!1)),a=!1,!0}</span>):o.checkerFunction=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var n=o.getHash()||"";<span class="cstat-no" title="statement not covered" >r</span>eturn n!==t&amp;&amp;(t=n,o.Adapter.trigger(e,"hashchange")),!0}</span>,o.intervalList.push(s(o.checkerFunction,o.options.hashChangeInterval)),!0}</span>,o.Adapter.onDomLoad(o.hashChangeInit))</span>,o.emulated.pushState&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >o.onHashChange=<span class="fstat-no" title="function not covered" >function(t){<span class="cstat-no" title="statement not covered" ></span>var n=t&amp;&amp;t.newURL||o.getLocationHref(),r=o.getHashByUrl(n),i=null,s=null,u=null,a;<span class="cstat-no" title="statement not covered" >r</span>eturn o.isLastHash(r)?(o.busy(!1),!1):(o.doubleCheckComplete(),o.saveHash(r),r&amp;&amp;o.isTraditionalAnchor(r)?(o.Adapter.trigger(e,"anchorchange"),o.busy(!1),!1):(i=o.extractState(o.getFullUrl(r||o.getLocationHref()),!0),o.isLastSavedState(i)?(o.busy(!1),!1):(s=o.getHashByState(i),a=o.discardedState(i),a?(o.getHashByIndex(-2)===o.getHashByState(a.forwardState)?o.back(!1):o.forward(!1),!1):(o.pushState(i.data,i.title,encodeURI(i.url),!1),!0))))}</span>,o.Adapter.bind(e,"hashchange",o.onHashChange),o.pushState=<span class="fstat-no" title="function not covered" >function(t,n,r,i){<span class="cstat-no" title="statement not covered" ></span>r=encodeURI(r).replace(/%25/g,"%");<span class="cstat-no" title="statement not covered" >i</span>f(o.getHashByUrl(r))<span class="cstat-no" title="statement not covered" >throw new Error("History.js does not support states with fragment-identifiers (hashes/anchors).");<span class="cstat-no" title="statement not covered" >i</span></span>f(i!==!1&amp;&amp;o.busy())<span class="cstat-no" title="statement not covered" >return o.pushQueue({scope:o,callback:o.pushState,args:arguments,queue:i}),!1;<span class="cstat-no" title="statement not covered" >o</span></span>.busy(!0);<span class="cstat-no" title="statement not covered" >v</span>ar s=o.createStateObject(t,n,r),u=o.getHashByState(s),a=o.getState(!1),f=o.getHashByState(a),l=o.getHash(),c=o.expectedStateId==s.id;<span class="cstat-no" title="statement not covered" >r</span>eturn o.storeState(s),o.expectedStateId=s.id,o.recycleState(s),o.setTitle(s),u===f?(o.busy(!1),!1):(o.saveState(s),c||o.Adapter.trigger(e,"statechange"),!o.isHashEqual(u,l)&amp;&amp;!o.isHashEqual(u,o.getShortUrl(o.getLocationHref()))&amp;&amp;o.setHash(u,!1),o.busy(!1),!0)}</span>,o.replaceState=<span class="fstat-no" title="function not covered" >function(t,n,r,i){<span class="cstat-no" title="statement not covered" ></span>r=encodeURI(r).replace(/%25/g,"%");<span class="cstat-no" title="statement not covered" >i</span>f(o.getHashByUrl(r))<span class="cstat-no" title="statement not covered" >throw new Error("History.js does not support states with fragment-identifiers (hashes/anchors).");<span class="cstat-no" title="statement not covered" >i</span></span>f(i!==!1&amp;&amp;o.busy())<span class="cstat-no" title="statement not covered" >return o.pushQueue({scope:o,callback:o.replaceState,args:arguments,queue:i}),!1;<span class="cstat-no" title="statement not covered" >o</span></span>.busy(!0);<span class="cstat-no" title="statement not covered" >v</span>ar s=o.createStateObject(t,n,r),u=o.getHashByState(s),a=o.getState(!1),f=o.getHashByState(a),l=o.getStateByIndex(-2);<span class="cstat-no" title="statement not covered" >r</span>eturn o.discardState(a,s,l),u===f?(o.storeState(s),o.expectedStateId=s.id,o.recycleState(s),o.setTitle(s),o.saveState(s),o.Adapter.trigger(e,"statechange"),o.busy(!1)):o.pushState(s.data,s.title,s.url,!1),!0}</span>)</span>,o.emulated.pushState&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >o.getHash()&amp;</span>&amp;<span class="branch-2 cbranch-no" title="branch not covered" >!o.emulated.hashChange&amp;</span>&amp;<span class="branch-3 cbranch-no" title="branch not covered" >o.Adapter.onDomLoad(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>o.Adapter.trigger(e,"hashchange")}</span>)}</span>,typeof o.init!="undefined"&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >o.init()}</span>(window),function(e,t){"use strict";var n=e.console||<span class="branch-1 cbranch-no" title="branch not covered" >t,</span>r=e.document,i=e.navigator,s=!1,o=e.setTimeout,u=e.clearTimeout,a=e.setInterval,f=e.clearInterval,l=e.JSON,c=e.alert,h=e.History=e.History||<span class="branch-1 cbranch-no" title="branch not covered" >{},</span>p=e.history;try{s=e.sessionStorage,s.setItem("TEST","1"),s.removeItem("TEST")}catch(d){<span class="cstat-no" title="statement not covered" >s=!1}</span>l.stringify=l.stringify||<span class="branch-1 cbranch-no" title="branch not covered" >l.encode,</span>l.parse=l.p<span class="missing-if-branch" title="if path not taken" >I</span>arse||<span class="branch-1 cbranch-no" title="branch not covered" >l.decode;</span>if(typeof h.init!="undefined")<span class="cstat-no" title="statement not covered" >throw new Error("History.js Core has already been loaded...");h</span>.init=function(e){return typeof h.Adapter=="undefined"?<span class="branch-0 cbranch-no" title="branch not covered" >!1:</span>(typeof h.initCore!="undefined"&amp;&amp;h.initCore(),typeof h.initHtml4!="undefined"&amp;&amp;h.initHtml4(),!0)},h.initCo<span class="missing-if-branch" title="if path not taken" >I</span>re=function(d){if(typeof h.initCore.initialized!="undefined")<span class="cstat-no" title="statement not covered" >return!1;h</span>.initCore.initialized=!0,h.options=h.options||{},h.options.hashChangeInterval=h.options.hashChangeInterval||100,h.options.safariPollInterval=h.options.safariPollInterval||500,h.options.doubleCheckInterval=h.options.doubleCheckInterval||500,h.options.disableSuid=h.options.disableSuid||!1,h.options.storeInterval=h.options.storeInterval||1e3,h.options.busyDelay=h.options.busyDelay||250,h.options.debug=h.options.debug||!1,h.options.initialTitle=h.options.initialTitle||r.title,h.options.html4Mode=h.options.html4Mode||!1,h.options.delayInit=h.options.delayInit||!1,h.intervalList=[],h.clearAllIntervals=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var e,t=h.intervalList;<span class="cstat-no" title="statement not covered" >i</span>f(typeof t!="undefined"&amp;&amp;t!==null){<span class="cstat-no" title="statement not covered" >for(e=0;e&lt;t.length;e++)<span class="cstat-no" title="statement not covered" >f(t[e]);<span class="cstat-no" title="statement not covered" >h</span></span>.intervalList=null}</span>}</span>,h.debug=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>(h.options.debug||!1)&amp;&amp;h.log.apply(h,arguments)}</span>,h.log=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var e=typeof n!="undefined"&amp;&amp;typeof n.log!="undefined"&amp;&amp;typeof n.log.apply!="undefined",t=r.getElementById("log"),i,s,o,u,a;<span class="cstat-no" title="statement not covered" >e</span>?(u=Array.prototype.slice.call(arguments),i=u.shift(),typeof n.debug!="undefined"?n.debug.apply(n,[i,u]):n.log.apply(n,[i,u])):i="\n"+arguments[0]+"\n";<span class="cstat-no" title="statement not covered" >f</span>or(s=1,o=arguments.length;s&lt;o;++s){<span class="cstat-no" title="statement not covered" >a=arguments[s];<span class="cstat-no" title="statement not covered" >i</span>f(typeof a=="object"&amp;&amp;typeof l!="undefined")<span class="cstat-no" title="statement not covered" >try{<span class="cstat-no" title="statement not covered" >a=l.stringify(a)}</span>catch(f){}<span class="cstat-no" title="statement not covered" >i</span></span>+="\n"+a+"\n"}<span class="cstat-no" title="statement not covered" ></span>r</span>eturn t?(t.value+=i+"\n-----\n",t.scrollTop=t.scrollHeight-t.clientHeight):e||c(i),!0}</span>,h.getInternetExplorerMajorVersion=function(){var e=h.getInternetExplorerMajorVersion.cached=typeof h.getInternetExplorerMajorVersion.cached!="undefined"?<span class="branch-0 cbranch-no" title="branch not covered" >h.getInternetExplorerMajorVersion.cached:</span>function(){var e=3,t=r.createElement("div"),n=t.getElementsByTagName("i");while((t.innerHTML="&lt;!--[if gt IE "+ ++e+"]&gt;&lt;i&gt;&lt;/i&gt;&lt;![endif]--&gt;")&amp;&amp;n[0]);return e&gt;4?<span class="branch-0 cbranch-no" title="branch not covered" >e:</span>!1}();return e},h.isInternetExplorer=function(){var e=h.isInternetExplorer.cached=typeof h.isInternetExplorer.cached!="undefined"?h.isInternetExplorer.cached:Boolean(h.getInternetExplorerMajorVersion());return e},h.options.html4Mode?<span class="branch-0 cbranch-no" title="branch not covered" >h.emulated={pushState:!0,hashChange:!0}:</span>h.emulated={pushState:!Boolean(e.history&amp;&amp;e.history.pushState&amp;&amp;e.history.replaceState&amp;&amp;!/ Mobile\/([1-7][a-z]|(8([abcde]|f(1[0-8]))))/i.test(i.userAgent)&amp;&amp;!/AppleWebKit\/5([0-2]|3[0-2])/i.test(i.userAgent)),hashChange:Boolean(!("onhashchange"in e||<span class="branch-1 cbranch-no" title="branch not covered" >"onhashchange"in r)</span>||h.isInternetExplorer()&amp;&amp;<span class="branch-2 cbranch-no" title="branch not covered" >h.getInternetExplorerMajorVersion()&lt;8)</span>},h.enabled=!h.emulated.pushState,h.bugs={setHash:Boolean(!h.emulated.pushState&amp;&amp;i.vendor==="Apple Computer, Inc."&amp;&amp;/AppleWebKit\/5([0-2]|3[0-3])/.test(i.userAgent)),safariPoll:Boolean(!h.emulated.pushState&amp;&amp;i.vendor==="Apple Computer, Inc."&amp;&amp;/AppleWebKit\/5([0-2]|3[0-3])/.test(i.userAgent)),ieDoubleCheck:Boolean(h.isInternetExplorer()&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >h.getInternetExplorerMajorVersion()&lt;8)</span>,hashEscape:Boolean(h.isInternetExplorer()&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >h.getInternetExplorerMajorVersion()&lt;7)</span>},h.isEmptyObject=function(e){for(var t in e)<span class="cstat-no" title="statement not covered" >if(e.hasOwnProperty(t))<span class="cstat-no" title="statement not covered" >return!1;r</span></span>eturn!0},h.cloneObject=function(e){var t,n;return e?(t=l.stringify(e),n=l.parse(t)):<span class="branch-1 cbranch-no" title="branch not covered" >n={},</span>n},h.getRootUrl=function(){var e=r.location.protocol+"//"+(r.location.hostname||<span class="branch-1 cbranch-no" title="branch not covered" >r.<span class="missing-if-branch" title="else path not taken" >E</span>location.host)</span>;if(r.location.port||<span class="branch-1 cbranch-no" title="branch not covered" >!1)</span>e+=":"+r.location.port;return e+="/",e},h.getBaseHref=function(){var e=r.getElementsByTagName("base"),t=null,n="";return e.length===1&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >t=e[0],n=t.href.replace(/[^\/]+$/,""))</span>,n=n.replace(/\/+$/,""),n&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >n+="/")</span>,n},h.getBaseUrl=function(){var e=h.getBaseHref()||h.getBasePageUrl()||<span class="branch-2 cbranch-no" title="branch not covered" >h.getRootUrl();</span>return e},h.getPageUrl=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var e=h.getState(!1,!1),t=(e||{}).url||h.getLocationHref(),n;<span class="cstat-no" title="statement not covered" >r</span>eturn n=t.replace(/\/+$/,"").replace(/[^\/]+$/,<span class="fstat-no" title="function not covered" >function(e,t,n){<span class="cstat-no" title="statement not covered" ></span>return/\./.test(e)?e:e+"/"}</span>),n}</span>,h.getBasePageUrl=function(){var e=h.getLocationHref().replace(/[#\?].*/,"").replace(/[^\/]+$/,function(e,t,n){return/[^\/]$/.test(e)?"":<span class="branch-1 cbranch-no" title="branch not covered" >e}</span>).replace(/\/+$/,"")+"/";return e},h.getFullUrl=function(e,t){var n=e,r=e.substring(0,1);return t=typeof t=="undefined"?!0:<span class="branch-1 cbranch-no" title="branch not covered" >t,</span>/[a-z]+\:\/\//.test(e)||(r==="/"?n=h.getRootUrl()+e.replace(/^\/+/,""):<span class="branch-1 cbranch-no" title="branch not covered" >r==="#"?n=h.getPageUrl().replace(/#.*/,"")+e:r==="?"?n=h.getPageUrl().replace(/[\?#].*/,"")+e:t?n=h.getBaseUrl()+e.replace(/^(\.\/)+/,""):n=h.getBasePageUrl()+e.replace(/^(\.\/)+/,""))</span>,n.replace(/\#$/,"")},h.getShortUrl=function(e){var t=e,n=h.getBaseUrl(),r=h.getRootUrl();return h.emulated.pushState&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >t=t.replace(n,""))</span>,t=t.replace(r,"/"),h.isTraditionalAnchor(t)&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >t="./"+t)</span>,t=t.replace(/^(\.\/)+/g,"./").replace(/\#$/,""),t},h.getLocationHref=function(e){return e=e||r,e.URL===e.location.href?e.location.href:<span class="branch-1 cbranch-no" title="branch not covered" >e.location.href===decodeURIComponent(e.URL)?e.URL:e.location.hash&amp;&amp;decodeURIComponent(e.location.href.replace(/^[^#]+/,""))===e.location.hash?e.location.href:e.URL.indexOf("#")==-1&amp;&amp;e.location.href.indexOf("#")!=-1?e.location.href:e.URL||e.location.href}</span>,h.store={},h.idToState=h.idToState||{},h.stateToId=h.stateToId||{},h.urlToId=h.urlToId||{},h.storedStates=h.storedStates||[],h.savedStates=h.savedStates||[],h.normalizeStore=function(){h.store.idToState=h.store.idToState||{},h.store.urlToId=h.store.urlToId||{},h.store.stateToId=h.store.stateToId||{}},h.getState=<span class="fstat-no" title="function not covered" >function(e,t){<span class="cstat-no" title="statement not covered" ></span>typeof e=="undefined"&amp;&amp;(e=!0),typeof t=="undefined"&amp;&amp;(t=!0);<span class="cstat-no" title="statement not covered" >v</span>ar n=h.getLastSavedState();<span class="cstat-no" title="statement not covered" >r</span>eturn!n&amp;&amp;t&amp;&amp;(n=h.createStateObject()),e&amp;&amp;(n=h.cloneObject(n),n.url=n.cleanUrl||n.url),n}</span>,h.getIdByState=function(e){var t=h.extr<span class="missing-if-branch" title="else path not taken" >E</span>actId(e.url),n;if(!t){n=h.get<span class="missing-if-branch" title="if path not taken" >I</span>StateString(e);if(typeof h.stateToId[n]!="undefined")<span class="cstat-no" title="statement not covered" >t=h.sta<span class="missing-if-branch" title="if path not taken" >I</span>teToId[n];e</span>lse if(typeof h.store.stateToId[n]!="undefined")<span class="cstat-no" title="statement not covered" >t=h.store.stateToId[n];e</span>lse{for(;;){t=(new Date).getTime()+String(Math.random()).rep<span class="missing-if-branch" title="else path not taken" >E</span>lace(/\D/g,"");if(typeof h.idToState[t]=="undefined"&amp;&amp;typeof h.store.idToState[t]=="undefined")break}h.stateToId[n]=t,h.idToState[t]=e}}return t},h.normalizeState=funct<span class="missing-if-branch" title="if path not taken" >I</span>ion(e){var t,n;if(!e||typeof e!="object")<span class="cstat-no" title="statement not covered" >e={};i</span>f(typeof e.normalized!="undef<span class="missing-if-branch" title="else path not taken" >E</span>ined")return e;if(!e.data||<span class="branch-1 cbranch-no" title="branch not covered" >typeof e.data!="object")</span>e.data={};return t={},t.normalized=!0,t.title=e.title||"",t.url=h.getFullUrl(e.url?e.url:<span class="branch-1 cbranch-no" title="branch not covered" >h.getLocationHref())</span>,t.hash=h.getShortUrl(t.url),t.data=h.cloneObject(e.data),t.id=h.getIdByState(t),t.cleanUrl=t.url.replace(/\??\&amp;_suid.*/,""),t.url=t.cleanUrl,n=!h.isEmptyObject(t.data),(t.title||n)&amp;&amp;<span class="branch-2 cbranch-no" title="branch not covered" >h.options.disableSuid!==!0&amp;</span>&amp;(<span class="branch-3 cbranch-no" title="branch not covered" >t.hash=h.getShortUrl(t.url).replace(/\??\&amp;_suid.*/,""),/\?/.test(t.hash)||(t.hash+="?"),t.hash+="&amp;_suid="+t.id)</span>,t.hashedUrl=h.getFullUrl(t.hash),(h.emulated.pushState||h.bugs.safariPoll)&amp;&amp;<span class="branch-2 cbranch-no" title="branch not covered" >h.hasUrlDuplicate(t)&amp;</span>&amp;(<span class="branch-3 cbranch-no" title="branch not covered" >t.url=t.hashedUrl)</span>,t},h.createStateObject=function(e,t,n){var r={data:e,title:t,url:n};return r=h.normalizeState(r),r},h.getStateById=function(e){e=String(e);var n=h.idToState[e]||<span class="branch-1 cbranch-no" title="branch not covered" >h.store.idToState[e]|</span>|<span class="branch-2 cbranch-no" title="branch not covered" >t;</span>return n},h.getStateString=function(e){var t,n,r;return t=h.normalizeState(e),n={data:t.data,title:e.title,url:e.url},r=l.stringify(n),r},h.getStateId=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t,n;<span class="cstat-no" title="statement not covered" >r</span>eturn t=h.normalizeState(e),n=t.id,n}</span>,h.getHashByState=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t,n;<span class="cstat-no" title="statement not covered" >r</span>eturn t=h.normalizeState(e),n=t.hash,n}</span>,h.extractId=function(e){var t,n,r,i;return e.indexOf("#")!=-1?<span class="branch-0 cbranch-no" title="branch not covered" >i=e.split("#")[0]:</span>i=e,n=/(.*)\&amp;_suid=([0-9]+)$/.exec(i),r=n?<span class="branch-0 cbranch-no" title="branch not covered" >n[1]||e:</span>e,t=n?<span class="branch-0 cbranch-no" title="branch not covered" >String(n[2]||""):</span>"",t||!1},h.isTraditionalAnchor=function(e){var t=!/[\/\?\.]/.test(e);return t},h.extractState=function(e,t){var n=null,r,i;return t=t||!1,r=h.extractId(e),r&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >n=h.getStateById(r))</span>,n||(i=h.getFullUrl(e),r=h.getIdByUrl(i)||!1,r&amp;&amp;(n=h.getStateById(r)),!n&amp;&amp;t&amp;&amp;!h.isTraditionalAnchor(e)&amp;&amp;(n=h.createStateObject(null,null,i))),n},h.getIdByUrl=function(e){var n=h.urlToId[e]||h.store.urlToId[e]||t;return n},h.getLastSavedState=function(){return h.savedStates[h.savedStates.length-1]||<span class="branch-1 cbranch-no" title="branch not covered" >t}</span>,h.getLastStoredState=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return h.storedStates[h.storedStates.length-1]||t}</span>,h.hasUrlDuplicate=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=!1,n;<span class="cstat-no" title="statement not covered" >r</span>eturn n=h.extractState(e.url),t=n&amp;&amp;n.id!==e.id,t}</span>,h.storeState=function(e){return h.urlToId[e.url]=e.id,h.storedStates.push(h.cloneObject(e)),e},h.isLastSavedState=function(e){var t=!1,n,r,i;return h.savedStates.length&amp;&amp;(n=e.id,r=h.getLastSavedState(),i=r.id,t=n===i),t},h.saveState=function(e){return h.isLastSavedState(e)?<span class="branch-0 cbranch-no" title="branch not covered" >!1:</span>(h.savedStates.push(h.cloneObject(e)),!0)},h.getStateByIndex=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=null;<span class="cstat-no" title="statement not covered" >r</span>eturn typeof e=="undefined"?t=h.savedStates[h.savedStates.length-1]:e&lt;0?t=h.savedStates[h.savedStates.length+e]:t=h.savedStates[e],t}</span>,h.getCurrentIndex=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var e=null;<span class="cstat-no" title="statement not covered" >r</span>eturn h.savedStates.length&lt;1?e=0:e=h.savedStates.length-1,e}</span>,h.getHash=function(e){var t=h.getLocationHref(e),n;return n=h.getHashByUrl(t),n},h.unescapeHash=function(e){var t=h.normalizeHash(e);return t=decodeURIComponent(t),t},h.normalizeHash=function(e){var t=e.replace(/[^#]*#/,"").replace(/#.*/,"");return t},h.setHash=<span class="fstat-no" title="function not covered" >function(e,t){<span class="cstat-no" title="statement not covered" ></span>var n,i;<span class="cstat-no" title="statement not covered" >r</span>eturn t!==!1&amp;&amp;h.busy()?(h.pushQueue({scope:h,callback:h.setHash,args:arguments,queue:t}),!1):(h.busy(!0),n=h.extractState(e,!0),n&amp;&amp;!h.emulated.pushState?h.pushState(n.data,n.title,n.url,!1):h.getHash()!==e&amp;&amp;(h.bugs.setHash?(i=h.getPageUrl(),h.pushState(null,null,i+"#"+e,!1)):r.location.hash=e),h)}</span>,h.escapeHash=<span class="fstat-no" title="function not covered" >function(t){<span class="cstat-no" title="statement not covered" ></span>var n=h.normalizeHash(t);<span class="cstat-no" title="statement not covered" >r</span>eturn n=e.encodeURIComponent(n),h.bugs.hashEscape||(n=n.replace(/\%21/g,"!").replace(/\%26/g,"&amp;").replace(/\%3D/g,"=").replace(/\%3F/g,"?")),n}</span>,h.getHashByUrl=function(e){var t=String(e).replace(/([^#]*)#?([^#]*)#?(.*)/,"$2");return t=h.unescapeHash(t),t},h.setTitle=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>var t=e.title,n;<span class="cstat-no" title="statement not covered" >t</span>||(n=h.getStateByIndex(0),n&amp;&amp;n.url===e.url&amp;&amp;(t=n.title||h.options.initialTitle));<span class="cstat-no" title="statement not covered" >t</span>ry{<span class="cstat-no" title="statement not covered" >r.getElementsByTagName("title")[0].innerHTML=t.replace("&lt;","&amp;lt;").replace("&gt;","&amp;gt;").replace(" &amp; "," &amp;amp; ")}</span>catch(i){}<span class="cstat-no" title="statement not covered" >r</span>eturn r.title=t,h}</span>,h.queues=[],h.busy=function(e){typeof e!="undefined"?h.busy.flag=e:<span class="branch-1 cbranch-no" title="branch not covered" >typeof h.busy.flag=="undefined"&amp;&amp;(h<span class="missing-if-branch" title="else path not taken" >E</span>.busy.flag=!1);</span>if(!h.busy.flag){u(h.busy.timeout);var t=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var e,n,r;<span class="cstat-no" title="statement not covered" >i</span>f(h.busy.flag)<span class="cstat-no" title="statement not covered" >return;<span class="cstat-no" title="statement not covered" >f</span></span>or(e=h.queues.length-1;e&gt;=0;--e){<span class="cstat-no" title="statement not covered" >n=h.queues[e];<span class="cstat-no" title="statement not covered" >i</span>f(n.length===0)<span class="cstat-no" title="statement not covered" >continue;<span class="cstat-no" title="statement not covered" >r</span></span>=n.shift(),h.fireQueueItem(r),h.busy.timeout=o(t,h.options.busyDelay)}</span>}</span>;h.busy.timeout=o(t,h.options.busyDelay)}return h.busy.flag},h.busy.flag=!1,h.fireQueueItem=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return e.callback.apply(e.scope||h,e.args||[])}</span>,h.pushQueue=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return h.queues[e.queue||0]=h.queues[e.queue||0]||[],h.queues[e.queue||0].push(e),h}</span>,h.queue=<span class="fstat-no" title="function not covered" >function(e,t){<span class="cstat-no" title="statement not covered" ></span>return typeof e=="function"&amp;&amp;(e={callback:e}),typeof t!="undefined"&amp;&amp;(e.queue=t),h.busy()?h.pushQueue(e):h.fireQueueItem(e),h}</span>,h.clearQueue=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return h.busy.flag=!1,h.queues=[],h}</span>,h.stateChanged=!1,h.doubleChecker=!1,h.doubleCheckComplete=function(){return h.stateChanged=!0,h.doubleCheckClear(),h},h.doubleCheckClear=function(){return h.doubleChecker&amp;&amp;(<span class="branch-1 cbranch-no" title="branch not covered" >u(h.doubleChecker),h.doubleChecker=!1)</span>,h},h.doubleCheck=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return h.stateChanged=!1,h.doubleCheckClear(),h.bugs.ieDoubleCheck&amp;&amp;(h.doubleChecker=o(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>return h.doubleCheckClear(),h.stateChanged||e(),!0}</span>,h.options.doubleCheckInterval)),h}</span>,h.safariStatePoll=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var t=h.extractState(h.getLocationHref()),n;<span class="cstat-no" title="statement not covered" >i</span>f(!h.isLastSavedState(t))<span class="cstat-no" title="statement not covered" >return n=t,n||(n=h.createStateObject()),h.Adapter.trigger(e,"popstate"),h;<span class="cstat-no" title="statement not covered" >r</span></span>eturn}</span>,h.back=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return e!==!1&amp;&amp;h.busy()?(h.pushQueue({scope:h,callback:h.back,args:arguments,queue:e}),!1):(h.busy(!0),h.doubleCheck(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>h.back(!1)}</span>),p.go(-1),!0)}</span>,h.forward=<span class="fstat-no" title="function not covered" >function(e){<span class="cstat-no" title="statement not covered" ></span>return e!==!1&amp;&amp;h.busy()?(h.pushQueue({scope:h,callback:h.forward,args:arguments,queue:e}),!1):(h.busy(!0),h.doubleCheck(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>h.forward(!1)}</span>),p.go(1),!0)}</span>,h.go=<span class="fstat-no" title="function not covered" >function(e,t){<span class="cstat-no" title="statement not covered" ></span>var n;<span class="cstat-no" title="statement not covered" >i</span>f(e&gt;0)<span class="cstat-no" title="statement not covered" >for(n=1;n&lt;=e;++n)<span class="cstat-no" title="statement not covered" >h.forward(t);e</span></span>lse{<span class="cstat-no" title="statement not covered" >if(!(e&lt;0))<span class="cstat-no" title="statement not covered" >throw new Error("History.go: History.go requires a positive or negative integer passed.");<span class="cstat-no" title="statement not covered" >f</span></span>or(n=-1;n&gt;=e;--n)<span class="cstat-no" title="statement not covered" >h.bac<span class="missing-if-branch" title="if path not taken" >I</span>k(t)}<span class="cstat-no" title="statement not covered" ></span></span>r</span>eturn h}</span>;if(h.emulated.pushState){<span class="cstat-no" title="statement not covered" >var v=<span class="fstat-no" title="function not covered" >function(){</span>};<span class="cstat-no" title="statement not covered" >h</span>.pushState=h.pushState||v,h.replaceState=h.replaceState||v}</span>else h.onPopState=function(t,n){var r=!1,i=!1,s,o;return h.doubleCheckComplete(),s=h.getHash(),s?(<span class="branch-0 cbranch-no" title="branch not covered" >o=h.extractState(s||h.getLocationHref(),!0),o?h.replaceState(o.data,o.title,o.url,!1):(h.Adapter.trigger(e,"anchorchange"),h.busy(!1)),h.expectedStateId=!1,!1)</span>:(r=h.Adapter.extractEventData("state",t,n)||!1,r?<span class="branch-0 cbranch-no" title="branch not covered" >i=h.getStateById(r):</span>h.expectedStateId?<span class="branch-0 cbranch-no" title="branch not covered" >i=h.getStateById(h.expectedStateId):</span>i=h.extractState(h.getLocationHref()),i||(<span class="branch-1 cbranch-no" title="branch not covered" >i=h.createStateObject(null,null,h.getLocationHref()))</span>,h.expectedStateId=!1,h.isLastSavedState(i)?(h.busy(!1),!1):(<span class="branch-1 cbranch-no" title="branch not covered" >h.storeState(i),h.saveState(i),h.setTitle(i),h.Adapter.trigger(e,"statechange"),h.busy(!1),!0)</span>)},h.Adapter.bind(e,"popstate",h.onPopState),h.pushState=<span class="fstat-no" title="function not covered" >function(t,n,r,i){<span class="cstat-no" title="statement not covered" ></span>if(h.getHashByUrl(r)&amp;&amp;h.emulated.pushState)<span class="cstat-no" title="statement not covered" >throw new Error("History.js does not support states with fragement-identifiers (hashes/anchors).");<span class="cstat-no" title="statement not covered" >i</span></span>f(i!==!1&amp;&amp;h.busy())<span class="cstat-no" title="statement not covered" >return h.pushQueue({scope:h,callback:h.pushState,args:arguments,queue:i}),!1;<span class="cstat-no" title="statement not covered" >h</span></span>.busy(!0);<span class="cstat-no" title="statement not covered" >v</span>ar s=h.createStateObject(t,n,r);<span class="cstat-no" title="statement not covered" >r</span>eturn h.isLastSavedState(s)?h.busy(!1):(h.storeState(s),h.expectedStateId=s.id,p.pushState(s.id,s.title,s.url),h.Adapter.trigger(e,"popstate")),!0}</span>,h.replaceState=<span class="fstat-no" title="function not covered" >function(t,n,r,i){<span class="cstat-no" title="statement not covered" ></span>if(h.getHashByUrl(r)&amp;&amp;h.emulated.pushState)<span class="cstat-no" title="statement not covered" >throw new Error("History.js does not support states with fragement-identifiers (hashes/anchors).");<span class="cstat-no" title="statement not covered" >i</span></span>f(i!==!1&amp;&amp;h.busy())<span class="cstat-no" title="statement not covered" >return h.pushQueue({scope:h,callback:h.replaceState,args:arguments,queue:i}),!1;<span class="cstat-no" title="statement not covered" >h</span></span>.busy(!0);<span class="cstat-no" title="statement not covered" >v</span>ar s=h.createStateObject(t,n,r);<span class="cstat-no" title="statement not covered" >r</span>eturn h.isLastSavedState(s)?h.busy(!1):(h.storeState(s),h.expectedStateId=s.id,p.replaceState(s.id,s.title,s.url),h.Adapter.trigger(e,"p<span class="missing-if-branch" title="else path not taken" >E</span>opstate")),!0}</span>;if(s){try{h.store=l.parse(s.getItem("History.store"))||{}}catch(m){<span class="cstat-no" title="statement not covered" >h.store={}}</span>h.normalizeStore()}else <span class="cstat-no" title="statement not covered" >h.store={},h.normalizeStore();h</span>.Adapter.bind(e,"unload",h.clearAllIntervals),h.saveState(h.storeState(h.extractState(h.getLocationHref(),!0))),s&amp;&amp;(h.onUnload=<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>var e,t,n;<span class="cstat-no" title="statement not covered" >t</span>ry{<span class="cstat-no" title="statement not covered" >e=l.parse(s.getItem("History.store"))||{}}</span>catch(r){<span class="cstat-no" title="statement not covered" >e={}}<span class="cstat-no" title="statement not covered" ></span>e</span>.idToState=e.idToState||{},e.urlToId=e.urlToId||{},e.stateToId=e.stateToId||{};<span class="cstat-no" title="statement not covered" >f</span>or(t in h.idToState){<span class="cstat-no" title="statement not covered" >if(!h.idToState.hasOwnProperty(t))<span class="cstat-no" title="statement not covered" >continue;<span class="cstat-no" title="statement not covered" >e</span></span>.idToState[t]=h.idToState[t]}<span class="cstat-no" title="statement not covered" ></span>f</span>or(t in h.urlToId){<span class="cstat-no" title="statement not covered" >if(!h.urlToId.hasOwnProperty(t))<span class="cstat-no" title="statement not covered" >continue;<span class="cstat-no" title="statement not covered" >e</span></span>.urlToId[t]=h.urlToId[t]}<span class="cstat-no" title="statement not covered" ></span>f</span>or(t in h.stateToId){<span class="cstat-no" title="statement not covered" >if(!h.stateToId.hasOwnProperty(t))<span class="cstat-no" title="statement not covered" >continue;<span class="cstat-no" title="statement not covered" >e</span></span>.stateToId[t]=h.stateToId[t]}<span class="cstat-no" title="statement not covered" ></span>h</span>.store=e,h.normalizeStore(),n=l.stringify(e);<span class="cstat-no" title="statement not covered" >t</span>ry{<span class="cstat-no" title="statement not covered" >s.setItem("History.store",n)}</span>catch(i){<span class="cstat-no" title="statement not covered" >if(i.code!==DOMException.QUOTA_EXCEEDED_ERR)<span class="cstat-no" title="statement not covered" >throw i;<span class="cstat-no" title="statement not covered" >s</span></span>.length&amp;&amp;(s.removeItem("History.store"),s.setItem("History.store",n))}</span>}</span>,h.intervalList.push(a(h.onUnload,h.options.storeInterval)),h.Adapter.bind(e,"beforeunload",h.onUnload),h.Adapter.bind(e,"unload<span class="missing-if-branch" title="else path not taken" >E</span>",h.onUnload));if(!h.emulated.pushState){h.bugs.safariPoll&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >h.intervalList.push(a(h.safariStatePoll,h.options.safari<span class="missing-if-branch" title="else path not taken" >E</span>PollInterval));</span>if(i.vendor==="Apple Computer, Inc."||<span class="branch-1 cbranch-no" title="branch not covered" >(i.appCodeName||"")==="Mozilla")</span>h.Adapter.bind(e,"hashchange",<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>h.Adapter.trigger(e,"popstate")}</span>),h.getHash()&amp;&amp;<span class="branch-1 cbranch-no" title="branch not covered" >h.Adapter.onDomLoad(<span class="fstat-no" title="function not covered" >function(){<span class="cstat-no" title="statement not covered" ></span>h.Adapter.trigger(e,"hashchange")}</span>)}</span>},(!h.options||<span class="branch-1 cbranch-no" title="branch not covered" >!h.options.delayInit)</span>&amp;&amp;h.init()}(window)</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat May 10 2014 14:07:58 GMT-0700 (PDT)</div>
+</div>
+
+<script src="../prettify.js"></script>
+
+<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>
